@@ -1,0 +1,45 @@
+name: "Automatic WordPress deployment to WP Engine"
+branding:
+  icon: "arrow-up-circle"
+  color: "yellow"
+description: "Set automatic deployments using an SSH private key and rsync."
+inputs:
+  WPE_SSH_KEY:
+    description: "The private RSA key. You must save this in the Github Secrets and authotize it on WP Engine."
+    required: true
+  PRD_BRANCH:
+    description: "Name of the branch you would like to deploy from, e.g., 'main'."
+    default: ""
+    required: false
+  PRD_ENV:
+    description: "Name of the WP Engine Prod environment you want to deploy to."
+    default: ""
+    required: false
+  STG_BRANCH:
+    description: "Name of the staging branch you would like to deploy from."
+    default: ""
+    required: false
+  STG_ENV:
+    description: "Name of the the WP Engine Stage environment you want to deploy to."
+    default: ""
+    required: false
+  DEV_BRANCH:
+    description: "Name of the a development branch you would like to deploy from."
+    default: ""
+    required: false
+  DEV_ENV:
+    description: "Name of the the WP Engine Dev environment you want to deploy to."
+    default: ""
+    required: false
+  SOURCE_PATH:
+    description: "Path to specify a theme, plugin, or any other directory source to deploy from. Defaults to the repository root."
+    default: ""
+    required: false
+  PUBLISH_PATH:
+    description: "Path to specify a theme, plugin, or any other directory destination to deploy to. Defaults to the WordPress root directory."
+    default: ""
+    required: false
+
+runs:
+  using: "docker"
+  image: "Dockerfile"

@@ -106,6 +106,15 @@ vendor
 ### Additional Resources
 
 -  [Generate a new SSH key pair](https://help.github.com/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent/)
--  [Setting up an SSH Gateway on WP Engine](https://wpengine.com/support/ssh-gateway/)
--  [Storing secrets in GitHub repositories](https://docs.github.com/en/actions/reference/encrypted-secrets)
+-  [Setting up SSH on WP Engine](https://wpengine.com/support/ssh-gateway/)
+-  [Storing secrets in GitHub](https://docs.github.com/en/actions/reference/encrypted-secrets)
 
+### Contributing
+Contributions to this action are always welcome and highly encouraged.
+
+### Attribution
+
+This action is based on the work made by Alex Zuniga on [GitHub Action for WP Engine Site Deployments](https://github.com/wpengine/github-action-wpe-site-deploy).
+
+### License
+This is open-sourced software licensed under the [MIT license](LICENSE.md).
