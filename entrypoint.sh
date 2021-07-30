@@ -64,7 +64,9 @@ chmod 600 "$WPE_SSH_KEY_PATH"
 # Deploy via SSH.
 rsync -chav --inplace \
 	--rsh="ssh -v -p 22 -i ${WPE_SSH_KEY_PATH} -o StrictHostKeyChecking=no" \
+	--exclude=".*" --exclude-from="$SRC_PATH/.deployignore" \
 	--chmod=D2775,F664 --out-format="%n" \
+	--delete --delete-excluded \
 	$SRC_PATH "$WPE_DESTINATION"
 
 # Flush permalinks and clear cache.
