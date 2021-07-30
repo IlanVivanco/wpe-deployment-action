@@ -14,7 +14,7 @@ After the deployment, this action will also purge your WP Engine cache and flush
 
 1. Add the following code to this new file, replacing values for `PRD_BRANCH` and `PRD_ENV` accordingly. Optionally, you can uncomment and set the values for `STG_BRANCH`/`STG_ENV` and `DEV_BRANCH`/`DEV_ENV` environments.
 
-   ###### .github/workflows/deploy.yml:
+   **`> .github/workflows/deploy.yml`**
 
    ```yml
    name: 📦 Deploy to WP Engine
@@ -53,7 +53,7 @@ After the deployment, this action will also purge your WP Engine cache and flush
 
 1. You can now push the latest changes to the repository, the action will do the rest.
 
-![Magic](https://media.giphy.com/media/l3V0dy1zzyjbYTQQM/giphy.gif)
+   ![Magic](https://media.giphy.com/media/l3V0dy1zzyjbYTQQM/giphy.gif)
 
 ## Setting up your SSH key
 
@@ -67,7 +67,7 @@ After the deployment, this action will also purge your WP Engine cache and flush
 
 If you want some files to be ignored upon deployment, you can create a `.deployignore` file on your source directory, adding the exclude patterns —one per line—. Blank lines and lines starting with _#_ will be ignored.
 
-#### .deployignore
+**`> .deployignore`**
 
 ```bash
 # Exclude rules
