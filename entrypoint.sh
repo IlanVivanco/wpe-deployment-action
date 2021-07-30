@@ -15,6 +15,16 @@ WPE_SSH_KEY_PATH="$SSH_PATH/wpe_deploy"
 # Copy secret keys to container.
 echo "$WPE_SSH_KEY" > "$WPE_SSH_KEY_PATH"
 
+###
+# Branches config.
+#
+# To add new environments, just copy/paste an elif line and the following export.
+# Then adjust variables names to match the new ones you added to the deploy.yml
+#
+# Example:
+# elif [[ ${GITHUB_REP} =~ ${NEW_BRANCH}$ ]]; then
+#     export WPE_ENV_NAME=${NEW_ENV};
+###
 if [[ $GITHUB_REF =~ ${PRD_BRANCH}$ ]]; then
 	export WPE_ENV_NAME=$PRD_ENV
 elif [[ $GITHUB_REF =~ ${STG_BRANCH}$ ]]; then
