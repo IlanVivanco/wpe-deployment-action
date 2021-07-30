@@ -54,3 +54,31 @@ After the deployment, this action will also purge your WP Engine cache and flush
 1. You can now push the latest changes to the repository, the action will do the rest.
 
 ![Magic](https://media.giphy.com/media/l3V0dy1zzyjbYTQQM/giphy.gif)
+
+## Setting up your SSH key
+
+1. [Generate a new SSH key pair](https://help.github.com/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent/) as a special deploy key between your GitHub Repo and WP Engine. The simplest method is to generate a key pair with a blank passphrase, which creates an unencrypted private key.
+
+1. Add the public SSH key to your [WP Engine SSH Keys](https://wpengine.com/support/ssh-gateway/#Add_SSH_Key) configuration panel.
+
+1. Store the private key in the GitHub repository as new [GitHub encrypted secret](https://docs.github.com/en/actions/reference/encrypted-secrets#creating-encrypted-secrets-for-a-repository) using the name `WPE_SSH_KEY` save it —this can be customized if you change the secret name in the yml file to call it correctly—.
+
+## Ignoring files
+
+If you want some files to be ignored upon deployment, you can create a `.deployignore` file on your source directory, adding the exclude patterns —one per line—. Blank lines and lines starting with _#_ will be ignored.
+
+#### .deployignore
+
+```bash
+# Exclude rules
+bin
+composer*
+dist
+gulp*
+node_modules
+package*
+phpcs*
+src
+vendor
+```
+
