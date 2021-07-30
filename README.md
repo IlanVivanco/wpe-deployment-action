@@ -31,7 +31,7 @@ After the deployment, this action will also purge your WP Engine cache and flush
             uses: actions/checkout@v2
 
             - name: 🔁 Deploying to WP Engine
-            uses: IlanVivanco/github-action-wpe-site-deploy@feature/filter-files
+            uses: IlanVivanco/wpe-deployment-action@main
             env:
                # Deployment options.
                WPE_SSH_KEY: ${{ secrets.WPE_SSH_KEY }}
