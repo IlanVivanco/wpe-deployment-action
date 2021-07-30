@@ -82,3 +82,30 @@ src
 vendor
 ```
 
+## Environment variables
+
+### Required
+
+| Name          | Type      | Usage                                                                                     |
+| ------------- | --------- | ----------------------------------------------------------------------------------------- |
+| `WPE_SSH_KEY` | _secrets_ | Authorized SSH private key for deployment. See [SSH key usage](#setting-up-your-ssh-key). |
+| `PRD_BRANCH`  | _string_  | Name of the branch you would like to deploy from, e.g., "_main_".                         |
+| `PRD_ENV`     | _string_  | Name of the WP Engine Prod environment you want to deploy to.                             |
+
+### Optional
+
+| Name           | Type     | Usage                                                                                                                       |
+| -------------- | -------- | --------------------------------------------------------------------------------------------------------------------------- |
+| `STG_BRANCH`   | _string_ | Name of the staging branch you would like to deploy from.                                                                   |
+| `STG_ENV`      | _string_ | Name of the the WP Engine Stage environment you want to deploy to.                                                          |
+| `DEV_BRANCH`   | _string_ | Name of the a development branch you would like to deploy from.                                                             |
+| `DEV_ENV`      | _string_ | Name of the the WP Engine Dev environment you want to deploy to.                                                            |
+| `SOURCE_PATH`  | _string_ | Path to specify a theme, plugin, or any other directory source to deploy from. Defaults to the repository root.             |
+| `PUBLISH_PATH` | _string_ | Path to specify a theme, plugin, or any other directory destination to deploy to. Defaults to the WordPress root directory. |
+
+### Additional Resources
+
+-  [Generate a new SSH key pair](https://help.github.com/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent/)
+-  [Setting up an SSH Gateway on WP Engine](https://wpengine.com/support/ssh-gateway/)
+-  [Storing secrets in GitHub repositories](https://docs.github.com/en/actions/reference/encrypted-secrets)
+
