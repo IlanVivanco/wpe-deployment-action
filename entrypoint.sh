@@ -56,7 +56,7 @@ rsync -chav --inplace \
 	--rsh="ssh -v -p 22 -i ${WPE_SSH_KEY_PATH} -o StrictHostKeyChecking=no" \
 	$SRC_PATH "$WPE_DESTINATION"
 
-# Clear cache.
-ssh -v -p 22 -i ${WPE_SSH_KEY_PATH} -o StrictHostKeyChecking=no $WPE_SSH_USER "cd sites/${WPE_ENV_NAME} && wp page-cache flush"
+# Flush permalinks and clear cache.
+ssh -v -p 22 -i ${WPE_SSH_KEY_PATH} -o StrictHostKeyChecking=no $WPE_SSH_USER "cd sites/${WPE_ENV_NAME} && wp rewrite flush && wp page-cache flush"
 
 echo "SUCCESS: Site has been deployed!"
