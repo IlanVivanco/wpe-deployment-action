@@ -35,20 +35,9 @@ else
 	echo "FAILURE: Branch name is required." && exit 1
 fi
 
-# Deploy directories.
-if [ -n "$PUBLISH_PATH" ]; then
-	DIR_PATH="$PUBLISH_PATH"
-else
-	DIR_PATH=""
-fi
-
-if [ -n "$SOURCE_PATH" ]; then
-	SRC_PATH="$SOURCE_PATH"
-else
-	SRC_PATH="."
-fi
-
 # Deploy vars.
+DIR_PATH=${PUBLISH_PATH:=""}
+SRC_PATH=${SOURCE_PATH:="."}
 WPE_SSH_HOST="$WPE_ENV_NAME.ssh.wpengine.net"
 WPE_SSH_USER="$WPE_ENV_NAME"@"$WPE_SSH_HOST"
 WPE_DESTINATION="$WPE_SSH_USER":sites/"$WPE_ENV_NAME"/"$DIR_PATH"
