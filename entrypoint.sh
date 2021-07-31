@@ -15,21 +15,19 @@ WPE_SSH_KEY_PATH="$SSH_PATH/wpe_deploy"
 # Copy secret keys to container.
 echo "$WPE_SSH_KEY" > "$WPE_SSH_KEY_PATH"
 
-###
-# Branches config.
-#
-# To add new environments, just copy/paste an elif line and the following export.
-# Then adjust variables names to match the new ones you added to the deploy.yml
-#
-# Example:
-# elif [[ ${GITHUB_REP} =~ ${NEW_BRANCH}$ ]]; then
-#     export WPE_ENV_NAME=${NEW_ENV};
-###
-if [[ $GITHUB_REF =~ ${PRD_BRANCH}$ ]]; then
+# Sanitize branches input characters.
+PRD_BRANCH=$(printf '%s' $PRD_BRANCH)
+STG_BRANCH=$(printf '%s' $STG_BRANCH)
+DEV_BRANCH=$(printf '%s' $DEV_BRANCH)
+
+# Use regex to check if there's a match with the current GITHUB_REF.
+# Replace commas with pipes and check if any branches at NN_BRANCH is a match.
+# If so, use the corresponding NN_ENV install for deploying.
+if [[ $GITHUB_REF =~ ($(echo $PRD_BRANCH | tr ',' '|'))$ ]]; then
 	export WPE_ENV_NAME=$PRD_ENV
-elif [[ $GITHUB_REF =~ ${STG_BRANCH}$ ]]; then
+elif [[ $GITHUB_REF =~ ($(echo $STG_BRANCH | tr ',' '|'))$ ]]; then
 	export WPE_ENV_NAME=$STG_ENV
-elif [[ $GITHUB_REF =~ ${DEV_BRANCH}$ ]]; then
+elif [[ $GITHUB_REF =~ ($(echo $DEV_BRANCH | tr ',' '|'))$ ]]; then
 	export WPE_ENV_NAME=$DEV_ENV
 else
 	echo "FAILURE: Branch name is required." && exit 1
@@ -42,10 +40,8 @@ WPE_SSH_HOST="$WPE_ENV_NAME.ssh.wpengine.net"
 WPE_SSH_USER="$WPE_ENV_NAME"@"$WPE_SSH_HOST"
 WPE_DESTINATION="$WPE_SSH_USER":sites/"$WPE_ENV_NAME"/"$DIR_PATH"
 
-# Setup our SSH Connection & use keys.
+# Setup our SSH Connection & set SSH permissions.
 ssh-keyscan -t rsa "$WPE_SSH_HOST" >> "$KNOWN_HOSTS_PATH"
-
-# Set key permissions.
 chmod 700 "$SSH_PATH"
 chmod 644 "$KNOWN_HOSTS_PATH"
 chmod 600 "$WPE_SSH_KEY_PATH"
