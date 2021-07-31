@@ -115,10 +115,8 @@ vendor
 
 Contributions to this action are always welcome and highly encouraged.
 
-### Attribution
+### License & Attribution
 
-This action is based on the work made by Alex Zuniga on [GitHub Action for WP Engine Site Deployments](https://github.com/wpengine/github-action-wpe-site-deploy).
+-  Licensed as MIT &copy; [Ilán Vivanco](https://ilanvivanco.com) 2021.
 
-### License
-
-This is open-sourced software licensed under the [MIT license](LICENSE.md).
+-  This action is based on the work made by Alex Zuniga on [GitHub Action for WP Engine Site Deployments](https://github.com/wpengine/github-action-wpe-site-deploy).
