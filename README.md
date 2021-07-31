@@ -12,7 +12,7 @@ After the deployment, this action will also purge your WP Engine cache and flush
 
 1. Create a new YML file in the directory `.github/workflows/` in the root of your repository. You can choose any name, e.g., `deploy.yml`.
 
-1. Add the following code to this new file, replacing values for `PRD_BRANCH` and `PRD_ENV` accordingly. Optionally, you can uncomment and set the values for `STG_BRANCH`/`STG_ENV` and `DEV_BRANCH`/`DEV_ENV` environments.
+1. Add the following code to this new file, replacing values for `PRD_BRANCH` and `PRD_ENV` accordingly.
 
    **`> .github/workflows/deploy.yml`**
 
@@ -42,18 +42,20 @@ After the deployment, this action will also purge your WP Engine cache and flush
                PRD_BRANCH: main
                PRD_ENV: prodinstall
 
-               # Uncomment this for staging environment.
+               # Uncomment this for setting a staging environment.
                # STG_BRANCH: staging
                # STG_ENV: stageinstall
 
-               # Uncomment this for development environment.
+               # Uncomment this for setting a development environment.
                # DEV_BRANCH: dev
                # DEV_ENV: devinstall
    ```
 
-1. You can now push the latest changes to the repository, the action will do the rest.
+1. Finally, push the latest changes to the repository, the action will do the rest.
 
    ![Magic](https://media.giphy.com/media/l3V0dy1zzyjbYTQQM/giphy.gif)
+
+> ℹ You can have multiple branches deploying to the same install by separating them with a comma, e.g., `PRD_BRANCH: main, dev, staging` will deploy all three branches to the WP Engine production environment.
 
 ## Setting up your SSH key
 
@@ -110,6 +112,7 @@ vendor
 -  [Storing secrets in GitHub](https://docs.github.com/en/actions/reference/encrypted-secrets)
 
 ### Contributing
+
 Contributions to this action are always welcome and highly encouraged.
 
 ### Attribution
@@ -117,4 +120,5 @@ Contributions to this action are always welcome and highly encouraged.
 This action is based on the work made by Alex Zuniga on [GitHub Action for WP Engine Site Deployments](https://github.com/wpengine/github-action-wpe-site-deploy).
 
 ### License
+
 This is open-sourced software licensed under the [MIT license](LICENSE.md).

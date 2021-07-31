@@ -33,7 +33,7 @@ inputs:
     required: false
   SOURCE_PATH:
     description: "Path to specify a theme, plugin, or any other directory source to deploy from. Defaults to the repository root."
-    default: ""
+    default: "."
     required: false
   PUBLISH_PATH:
     description: "Path to specify a theme, plugin, or any other directory destination to deploy to. Defaults to the WordPress root directory."
