@@ -23,6 +23,7 @@ DEV_BRANCH=$(printf '%s' $DEV_BRANCH)
 # Use regex to check if there's a match with the current GITHUB_REF.
 # Replace commas with pipes and check if any branches at NN_BRANCH is a match.
 # If so, use the corresponding NN_ENV install for deploying.
+FAIL_CODE=${FAIL_CODE:=1}
 if [[ $GITHUB_REF =~ ($(echo $PRD_BRANCH | tr ',' '|'))$ ]]; then
 	export WPE_ENV_NAME=$PRD_ENV
 elif [[ $GITHUB_REF =~ ($(echo $STG_BRANCH | tr ',' '|'))$ ]]; then
@@ -30,7 +31,7 @@ elif [[ $GITHUB_REF =~ ($(echo $STG_BRANCH | tr ',' '|'))$ ]]; then
 elif [[ $GITHUB_REF =~ ($(echo $DEV_BRANCH | tr ',' '|'))$ ]]; then
 	export WPE_ENV_NAME=$DEV_ENV
 else
-	echo "FAILURE: Branch name is required." && exit 1
+	echo "ABORT: At least a branch name is required." && exit FAIL_CODE
 fi
 
 # Deploy vars.

@@ -104,6 +104,7 @@ vendor
 | `DEV_ENV`      | _string_ | Name of the the WP Engine Dev environment you want to deploy to.                                                            |
 | `SOURCE_PATH`  | _string_ | Path to specify a theme, plugin, or any other directory source to deploy from. Defaults to the repository root.             |
 | `PUBLISH_PATH` | _string_ | Path to specify a theme, plugin, or any other directory destination to deploy to. Defaults to the WordPress root directory. |
+| `FAIL_CODE`    | _number_ | Code number to be used if the action fails (0 = success and 1 = error). Defaults to 1.                                      |
 
 ### Additional Resources
 
