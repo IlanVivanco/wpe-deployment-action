@@ -15,19 +15,18 @@ WPE_SSH_KEY_PATH="$SSH_PATH/wpe_deploy"
 # Copy secret keys to container.
 echo "$WPE_SSH_KEY" > "$WPE_SSH_KEY_PATH"
 
-# Sanitize branches input characters.
+# Sanitize branches input characters and replace commas with pipes.
 PRD_BRANCH=$(echo ${PRD_BRANCH// /} | tr ',' '|')
 STG_BRANCH=$(echo ${STG_BRANCH// /} | tr ',' '|')
 DEV_BRANCH=$(echo ${DEV_BRANCH// /} | tr ',' '|')
 
 # Use regex to check if there's a match with the current GITHUB_REF.
-# Replace commas with pipes and check if any branches at NN_BRANCH is a match.
-# If so, use the corresponding NN_ENV install for deploying.
-if [[ $GITHUB_REF =~ ($(echo $PRD_BRANCH))$  ]]; then
+# If so, use the corresponding install for deploying.
+if [ "$PRD_BRANCH" != '' ] && [[ $GITHUB_REF =~ ($(echo $PRD_BRANCH))$  ]]; then
 	export WPE_ENV_NAME=$PRD_ENV
-elif [[ $GITHUB_REF =~ ($(echo $STG_BRANCH))$ ]]; then
+elif [ "$STG_BRANCH" != '' ] && [[ $GITHUB_REF =~ ($(echo $STG_BRANCH))$ ]]; then
 	export WPE_ENV_NAME=$STG_ENV
-elif [[ $GITHUB_REF =~ ($(echo $DEV_BRANCH))$ ]]; then
+elif [ "$DEV_BRANCH" != '' ] && [[ $GITHUB_REF =~ ($(echo $DEV_BRANCH))$ ]]; then
 	export WPE_ENV_NAME=$DEV_ENV
 else
 	FAIL_CODE=${FAIL_CODE:=1}
