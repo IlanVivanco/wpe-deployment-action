@@ -16,23 +16,25 @@ WPE_SSH_KEY_PATH="$SSH_PATH/wpe_deploy"
 echo "$WPE_SSH_KEY" > "$WPE_SSH_KEY_PATH"
 
 # Sanitize branches input characters.
-PRD_BRANCH=$(printf '%s' $PRD_BRANCH)
-STG_BRANCH=$(printf '%s' $STG_BRANCH)
-DEV_BRANCH=$(printf '%s' $DEV_BRANCH)
+PRD_BRANCH=$(echo ${PRD_BRANCH// /} | tr ',' '|')
+STG_BRANCH=$(echo ${STG_BRANCH// /} | tr ',' '|')
+DEV_BRANCH=$(echo ${DEV_BRANCH// /} | tr ',' '|')
 
 # Use regex to check if there's a match with the current GITHUB_REF.
 # Replace commas with pipes and check if any branches at NN_BRANCH is a match.
 # If so, use the corresponding NN_ENV install for deploying.
-FAIL_CODE=${FAIL_CODE:=1}
-if [[ $GITHUB_REF =~ ($(echo $PRD_BRANCH | tr ',' '|'))$ ]]; then
+if [[ $GITHUB_REF =~ ($(echo $PRD_BRANCH))$  ]]; then
 	export WPE_ENV_NAME=$PRD_ENV
-elif [[ $GITHUB_REF =~ ($(echo $STG_BRANCH | tr ',' '|'))$ ]]; then
+elif [[ $GITHUB_REF =~ ($(echo $STG_BRANCH))$ ]]; then
 	export WPE_ENV_NAME=$STG_ENV
-elif [[ $GITHUB_REF =~ ($(echo $DEV_BRANCH | tr ',' '|'))$ ]]; then
+elif [[ $GITHUB_REF =~ ($(echo $DEV_BRANCH))$ ]]; then
 	export WPE_ENV_NAME=$DEV_ENV
 else
+	FAIL_CODE=${FAIL_CODE:=1}
 	echo "ABORT: At least a branch name is required." && exit FAIL_CODE
 fi
+
+echo "Starting deployment from $GITHUB_REF to $WPE_ENV_NAME"
 
 # Deploy vars.
 DIR_PATH=${PUBLISH_PATH:=""}

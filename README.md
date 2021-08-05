@@ -55,7 +55,7 @@ After the deployment, this action will also purge your WP Engine cache and flush
 
    ![Magic](https://media.giphy.com/media/l3V0dy1zzyjbYTQQM/giphy.gif)
 
-> ℹ You can have multiple branches deploying to the same install by separating them with a comma, e.g., `PRD_BRANCH: main, dev, staging` will deploy all three branches to the WP Engine production environment.
+> ℹ You can have multiple branches deploying to the same install by separating them with a comma, e.g., `PRD_BRANCH: main, dev, staging` will deploy all three branches to the WP Engine production environment. Using regex here, well help you to extend this to even more branches, e.g., `main, feature(/.*)?` will deploy the _main_ banch and also the _feature_ or _feature/anything_ branches.
 
 ## Setting up your SSH key
 
